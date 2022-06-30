@@ -44,14 +44,17 @@ void AHTTPGETActor::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 	{
 
 		UHTTPResponseWidget* ResponseWidget = Cast<UHTTPResponseWidget>(ResponseWidgetComponent->GetWidget());
-
-	
-
-		
-		
+		SendHTTPGet("");
+		if (ResponseWidget)
+		{
 			ResponseWidget->ShowLoading(true);
+
 			
-			SendHTTPGet("");
+		}
+
+		
+		
+
 	
 		
 		
@@ -112,14 +115,14 @@ void AHTTPGETActor::OnGetUsersResponse(FHttpRequestPtr Request, FHttpResponsePtr
 {
 	TSharedPtr<FJsonObject> JsonObject;
 	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Calling GetUsers"));
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("GetUsers response"));
 	// Probably don't want to do this here.
 	if (ResponseWidgetComponent)
 	{
-		UHTTPResponseWidget* ResponseWidget = Cast<UHTTPResponseWidget>(ResponseWidgetComponent->GetWidget());
-		if (ResponseWidget)
-		{
-			ResponseWidget->ShowLoading(false);
+		//UHTTPResponseWidget* ResponseWidget = Cast<UHTTPResponseWidget>(ResponseWidgetComponent->GetWidget());
+		//if (ResponseWidget)
+		//{
+			//ResponseWidget->ShowLoading(false);
 
 			if (Response->GetResponseCode() == 200)
 			{
@@ -130,23 +133,31 @@ void AHTTPGETActor::OnGetUsersResponse(FHttpRequestPtr Request, FHttpResponsePtr
 				{
 					// populated JsonObject, start parsing
 					// was "users" testing without field name.
+
+					
 					TArray<TSharedPtr<FJsonValue>> UserArray = JsonObject->GetArrayField("");
+
+
+
+					if (GEngine)
+						GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("data received")));
 
 					for (const TSharedPtr<FJsonValue> UserValue : UserArray)
 					{
+					
+
 						const FString Username = UserValue->AsObject()->GetStringField("Username");
 						const int32 UserId = UserValue->AsObject()->GetNumberField("ID");
-
-						ResponseWidget->AddUser(UserId, Username);
+						//ResponseWidget->AddUser(UserId, Username);
 					}
 				}
 			}
-			else
-			{
+			//else
+			//{
 				// TODO -> Trigger Error
-				ResponseWidget->ShowError(Response->GetResponseCode(), "Error occurred");
-			}
-		}
+				//ResponseWidget->ShowError(Response->GetResponseCode(), "Error occurred");
+			//}
+		//}
 	}
 	else
 	{
