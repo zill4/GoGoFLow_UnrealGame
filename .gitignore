@@ -1,6 +1,12 @@
+.DS_Store
+
+*.uasset
+*.umap
 # Visual Studio 2015 user specific files
 .vs/
 
+content/*
+content
 # Compiled Object files
 *.slo
 *.lo
