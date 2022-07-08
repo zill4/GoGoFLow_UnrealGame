@@ -52,13 +52,6 @@ void AHTTPGETActor::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 			
 		}
 
-		
-		
-
-	
-		
-		
-
 	}
 	else
 	{

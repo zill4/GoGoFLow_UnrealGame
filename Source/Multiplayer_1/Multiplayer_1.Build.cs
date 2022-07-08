@@ -12,6 +12,12 @@ public class Multiplayer_1 : ModuleRules
                                                             "Http", "Json", "JsonUtilities",
                                                             "UMG" });
 
+        PublicDependencyModuleNames.Add("GameplayAbilities");
+        PublicDependencyModuleNames.Add("OnlineSubsystem");
+        PublicDependencyModuleNames.Add("GameplayAbilities");
+        PublicDependencyModuleNames.Add("GameplayTags");
+        PublicDependencyModuleNames.Add("GameplayTasks");
+
         PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
     }
 }

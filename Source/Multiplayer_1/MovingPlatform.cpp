@@ -30,8 +30,8 @@ void AMovingPlatform::Tick(float DeltaTime) {
 	if (HasAuthority())
 	{
 		FVector Location = GetActorLocation();
-		// safe normal doesn't modify in lplace
-		float  JourneyLength = (GlobalTargetLocation - GlobalStartLocation).Size();
+		// safe normal doesn't modify in place
+		float JourneyLength = (GlobalTargetLocation - GlobalStartLocation).Size();
 		float JounrneyTravelled = (Location - GlobalStartLocation).Size();
 	
 		if (JounrneyTravelled >= JourneyLength)

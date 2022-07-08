@@ -11,8 +11,18 @@ class AMultiplayer_1GameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
-public:
+
+
+protected:
 	AMultiplayer_1GameMode();
+
+public:
+	void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
+
+	virtual void StartPlay() override;
+
+	void HandleStartingNewPlayer_Implementation(APlayerController* NewPlayer) override;
+
 };
 
 
